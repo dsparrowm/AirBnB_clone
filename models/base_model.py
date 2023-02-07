@@ -14,14 +14,24 @@ class BaseModel():
     This class also contains two publis instance methods\
             save | to_dict
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         this initialization method creates a unique id\
                 and creates a time instance
         """
-        self.id = uuid.uuid4()
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if bool(kwargs) is False:
+            self.id = uuid.uuid4()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+        else:
+            for key, value in kwargs.items():
+                if key in ["__class__"]:
+                    pass
+                elif key in ["created_at", "updated_at"]:
+                    value = datetime.fromisoformat(value)
+                    self.__setattr__(key, value)
+                else:
+                    self.__setattr__(key, value)
 
     def __str__(self):
         """
