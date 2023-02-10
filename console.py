@@ -39,9 +39,17 @@ class HBNBCommand(cmd.Cmd):
             all_objs = storage.all()
             del all_objs[key]
             storage.save()
+
     def do_all(self, line):
+        all_objs = storage.all()
         args = line.split()
+        res = []
         if len(args) == 0:
+            for obj_id in all_objs.keys():
+                val = all_objs[obj_id]
+                res.append(val)
+            print(res)
+            
 
     def emptyline(self):
         pass
