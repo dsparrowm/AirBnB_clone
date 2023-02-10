@@ -3,6 +3,13 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 class HBNBCommand(cmd.Cmd):
     """class definition for the command interpreter"""
@@ -19,7 +26,9 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line) :
         """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id"""
         if self.line_ver(line, "create"):
-            new_instance = BaseModel()
+            args = line.split()
+            class_ = eval(args[0])
+            new_instance = class_()
             print (new_instance.id)
             new_instance.save()
     
@@ -76,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
     def line_ver(self, arg, com):
         args = arg.split()
         if arg:
-            if args[0] in ["BaseModel"]:
+            if args[0] in ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]:
                 if com in ["create","all"]:
                     return True
                 elif com in["show", "destroy", "update"]:
