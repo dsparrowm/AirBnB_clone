@@ -43,12 +43,20 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line):
         all_objs = storage.all()
         args = line.split()
-        res = []
         if len(args) == 0:
+            res = []
             for obj_id in all_objs.keys():
                 val = all_objs[obj_id]
-                res.append(val)
+                res.append(str(val))
             print(res)
+        else:
+            res = []
+            if self.line_ver(line, "all"):
+                for obj_id in all_objs.keys():
+                    if args[0] in obj_id:
+                        val = all_objs[obj_id]
+                        res.append(str(val))
+                print(res)
             
 
     def emptyline(self):
