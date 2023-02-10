@@ -62,9 +62,16 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, line):
         """Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file)"""
         if self.line_ver(line, "update"):
-            print ("I work")
-
-            
+            args = line.split()
+            all_objs = storage.all()
+            for obj_id in all_objs.keys():
+                if f"{args[0]}.{args[1]}" == obj_id:
+                    all_objs[obj_id].args[2] = args[3]
+                    break
+            """
+            turn it into a dict then create it into a new instance lmaooooooo
+            """
+            storage.save()
 
     def emptyline(self):
         pass
