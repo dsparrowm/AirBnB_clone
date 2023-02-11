@@ -22,8 +22,9 @@ class BaseModel():
         """
         if bool(kwargs) is False:
             self.id = uuid.uuid4()
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            val = datetime.now()
+            self.created_at = val
+            self.updated_at = val
             models.storage.new(self)
         else:
             for key, value in kwargs.items():
