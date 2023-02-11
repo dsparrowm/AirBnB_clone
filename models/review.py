@@ -4,6 +4,7 @@ This module contains a single class Review inheriting from BaseModel
 """
 from models.base_model import BaseModel
 
+
 class Review(BaseModel):
     """
     this contains a representation of the class
@@ -11,4 +12,3 @@ class Review(BaseModel):
     place_id = ""
     user_id = ""
     text = ""
-

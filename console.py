@@ -22,26 +22,29 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """exits the command line usin EOF(^d)"""
         return True
-    
-    def do_create(self, line) :
-        """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id"""
+
+    def do_create(self, line):
+        """Creates a new instance of BaseModel, \
+                saves it (to the JSON file) and prints the id"""
         if self.line_ver(line, "create"):
             args = line.split()
             class_ = eval(args[0])
             new_instance = class_()
-            print (new_instance.id)
+            print(new_instance.id)
             new_instance.save()
-    
+
     def do_show(self, line):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints the string representation of an instance based \
+                on the class name and id"""
         if self.line_ver(line, "show"):
             args = line.split()
             key = f"{args[0]}.{args[1]}"
             all_objs = storage.all()
             print(all_objs[key])
-    
+
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id (save the change into the JSON file)"""
+        """Deletes an instance based on the class name and id \
+                (save the change into the JSON file)"""
         if self.line_ver(line, "destroy"):
             args = line.split()
             key = f"{args[0]}.{args[1]}"
@@ -50,7 +53,8 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, line):
-        """Prints all string representation of all instances based or not on the class name"""
+        """Prints all string representation of \
+                all instances based or not on the class name"""
         all_objs = storage.all()
         args = line.split()
         if len(args) == 0:
@@ -69,12 +73,14 @@ class HBNBCommand(cmd.Cmd):
                 print(res)
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file)"""
+        """Updates an instance based on the class name and id \
+                by adding or updating attribute \
+                (save the change into the JSON file)"""
         if self.line_ver(line, "update"):
             args = line.split()
             key = f"{args[0]}.{args[1]}"
             all_objs = storage.all()
-            obj_update = all_objs[key] 
+            obj_update = all_objs[key]
             attrname = args[2]
             value = args[3]
             setattr(obj_update, attrname, value)
@@ -85,10 +91,11 @@ class HBNBCommand(cmd.Cmd):
     def line_ver(self, arg, com):
         args = arg.split()
         if arg:
-            if args[0] in ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]:
-                if com in ["create","all"]:
+            if args[0] in ["BaseModel", "User", "State",
+                    "City", "Amenity", "Place", "Review"]:
+                if com in ["create", "all"]:
                     return True
-                elif com in["show", "destroy", "update"]:
+                elif com in ["show", "destroy", "update"]:
                     if len(args) > 1:
                         key = f"{args[0]}.{args[1]}"
                         all_objs = storage.all()
@@ -101,16 +108,17 @@ class HBNBCommand(cmd.Cmd):
                                         print("** value missing **")
                                 else:
                                     print("** attribute name missing **")
-                            else:    
+                            else:
                                 return True
                         else:
                             print("** no instance found **")
                     else:
                         print("** instance id missing **")
             else:
-                print ("** class doesn't exist **")
+                print("** class doesn't exist **")
         else:
             print("** class name missing **")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
