@@ -4,7 +4,7 @@ import uuid
 import models
 """
 This module contains a class BaseModel that defines\
-        all common attributes /methods for other classes:
+        all common attributes/methods for other classes:
 """
 
 
