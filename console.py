@@ -92,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if arg:
             if args[0] in ["BaseModel", "User", "State",
-                    "City", "Amenity", "Place", "Review"]:
+                           "City", "Amenity", "Place", "Review"]:
                 if com in ["create", "all"]:
                     return True
                 elif com in ["show", "destroy", "update"]:
