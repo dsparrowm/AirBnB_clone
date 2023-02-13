@@ -1,14 +1,12 @@
 #!/usr/bin/python3
-"""
-This module contains a single class Review inheriting from BaseModel
-"""
+"""This module creates a Review class"""
+
 from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """
-    this contains a representation of the class
-    """
+    """Class for managing review objects"""
+
     place_id = ""
     user_id = ""
     text = ""
